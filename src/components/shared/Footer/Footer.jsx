@@ -3,7 +3,7 @@ import { Globe, AtSign } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#eef0fb] border-t mt-20">
+    <footer className="bg-[#eef0fb] border-t">
       <div className="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10">
         <div>
           <h2 className="text-3xl font-bold text-green-700">SportNest</h2>
