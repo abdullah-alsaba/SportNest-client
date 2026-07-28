@@ -1,5 +1,5 @@
-import { Star } from "lucide-react";
 import Image from "next/image";
+import { Star } from "lucide-react";
 
 export default function Testimonials() {
   return (
@@ -9,14 +9,20 @@ export default function Testimonials() {
           What Our Athletes Say
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-6 mt-12">
+        <p className="text-gray-500 text-center mt-2">
+          Hear from players and facility owners who love using SportNest.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
           {/* Card 1 */}
-          <div className="bg-slate-50 border border-gray-100 rounded-xl p-6 shadow-sm">
-            <div className="flex items-center gap-3 mb-3">
+          <div className="bg-slate-50 border border-gray-100 rounded-xl p-6">
+            <div className="flex items-center gap-3 mb-4">
               <Image
-                src="https://i.pravatar.cc/100?img=12"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh4rUiwjPTDB2yCNmtyd_cCxQIpwUa13iiEXtqL1p5uw&s=10"
                 alt="Marcus Chen"
-                className="w-12 h-12 rounded-full"
+                width={48}
+                height={48}
+                className="rounded-full object-cover"
               />
 
               <div>
@@ -39,12 +45,14 @@ export default function Testimonials() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-slate-50 border border-gray-100 rounded-xl p-6 shadow-sm">
-            <div className="flex items-center gap-3 mb-3">
+          <div className="bg-slate-50 border border-gray-100 rounded-xl p-6">
+            <div className="flex items-center gap-3 mb-4">
               <Image
-                src="https://i.pravatar.cc/100?img=32"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzVRVcZrCYz6YguqgD_cLlssd3dr3ymolkJM1cHnWSwA&s=10"
                 alt="Sarah Williams"
-                className="w-12 h-12 rounded-full"
+                width={48}
+                height={48}
+                className="rounded-full object-cover"
               />
 
               <div>
@@ -68,12 +76,14 @@ export default function Testimonials() {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-slate-50 border border-gray-100 rounded-xl p-6 shadow-sm">
-            <div className="flex items-center gap-3 mb-3">
+          <div className="bg-slate-50 border border-gray-100 rounded-xl p-6">
+            <div className="flex items-center gap-3 mb-4">
               <Image
-                src="https://i.pravatar.cc/100?img=15"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZIAJi8VWgbrQH3ybkUY4GHxo2Cr2hM-YzOQAEgNkFag&s=10"
                 alt="David Miller"
-                className="w-12 h-12 rounded-full"
+                width={48}
+                height={48}
+                className="rounded-full object-cover"
               />
 
               <div>
@@ -91,8 +101,8 @@ export default function Testimonials() {
 
             <p className="text-sm text-gray-600 italic">
               As a coach, managing multiple facilities for my classes was a
-              nightmare until I found SportNest. It&apos;s a total game-changer for
-              my business.
+              nightmare until I found SportNest. It&apos;s a total game-changer
+              for my business.
             </p>
           </div>
         </div>
