@@ -41,15 +41,20 @@ export default function Navbar() {
           </Link>
         </nav>
 
-    
         <div className="flex items-center gap-3">
-          <Link href="/login" variant="light">
+          <Link
+            href="/login"
+            className="px-5 py-2 border border-green-500 text-green-600 rounded-full hover:bg-green-50 transition-all duration-300"
+          >
             Login
           </Link>
 
-          <Button as={Link} href="/register" color="primary" radius="full">
+          <Link
+            href="/register"
+            className="px-5 py-2 bg-green-600 text-white rounded-full hover:bg-green-700 shadow-md hover:shadow-lg transition-all duration-300"
+          >
             Get Started
-          </Button>
+          </Link>
         </div>
       </div>
     </header>

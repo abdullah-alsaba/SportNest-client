@@ -50,7 +50,7 @@ const LogIn = () => {
             Remember me for 30 days
           </label>
 
-          <Button  className=" bg-green-500 rounded-2xl h-14 w-full text-lg font-semibold">
+          <Button  className=" bg-green-500  rounded-2xl h-14 w-full text-lg font-semibold">
             Login →
           </Button>
         </Form>
@@ -67,7 +67,7 @@ const LogIn = () => {
           variant="outline"
           className="h-14 w-full text-base font-medium"
         >
-          <FaGoogle className="mr-2 text-lg text-green-500" />
+          <FaGoogle className=" rounded-2xl mr-2 text-lg text-green-500" />
           Continue with Google
         </Button>
 
