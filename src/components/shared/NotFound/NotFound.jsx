@@ -16,16 +16,13 @@ export default function NotFound() {
   return (
     <main className="bg-linear-to-b from-slate-50 to-slate-100 min-h-screen pb-0">
       <section className="max-w-7xl mx-auto px-5 pt-14 pb-0">
-        {/* Hero */}
-        <div className="bg-white rounded-[32px] shadow-xl border border-slate-200 overflow-hidden">
+         <div className="bg-white rounded-[32px] shadow-xl border border-slate-200 overflow-hidden">
           <div className="relative flex justify-center items-center h-80 md:h-105 bg-[radial-gradient(circle,#cbd5e1_1px,transparent_1px)] bg-size-[24px_24px]">
-            {/* Background 404 */}
-            <h1 className="absolute text-[180px] md:text-[320px] font-black text-slate-200 select-none leading-none">
+             <h1 className="absolute text-[180px] md:text-[320px] font-black text-slate-200 select-none leading-none">
               404
             </h1>
 
-            {/* Image */}
-            <Image
+             <Image
               src={image404}
               alt="404"
               width={370}
@@ -36,8 +33,7 @@ export default function NotFound() {
           </div>
         </div>
 
-        {/* Text */}
-        <div className="text-center mt-12">
+         <div className="text-center mt-12">
           <span className="inline-block bg-green-100 text-green-700 text-sm font-semibold rounded-full px-5 py-2">
             Lost Out Of Bounds
           </span>
@@ -52,8 +48,7 @@ export default function NotFound() {
             game.
           </p>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center gap-5 mt-10">
+           <div className="flex flex-col sm:flex-row justify-center gap-5 mt-10">
             <Link
               href="/"
               className="bg-green-700 hover:bg-green-800 duration-300 text-white px-8 py-4 rounded-xl flex items-center justify-center gap-2 font-medium"
@@ -72,8 +67,7 @@ export default function NotFound() {
           </div>
         </div>
 
-        {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mt-24 pb-14">
+         <div className="grid md:grid-cols-3 gap-8 mt-24 pb-14">
           <div className="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm hover:shadow-lg duration-300">
             <Search className="text-green-700" size={28} />
 

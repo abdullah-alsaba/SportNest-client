@@ -14,7 +14,7 @@ export default function Testimonials() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-          {/* Card 1 */}
+         
           <div className="bg-slate-50 border border-gray-100 rounded-xl p-6">
             <div className="flex items-center gap-3 mb-4">
               <Image
@@ -44,7 +44,6 @@ export default function Testimonials() {
             </p>
           </div>
 
-          {/* Card 2 */}
           <div className="bg-slate-50 border border-gray-100 rounded-xl p-6">
             <div className="flex items-center gap-3 mb-4">
               <Image
@@ -75,7 +74,7 @@ export default function Testimonials() {
             </p>
           </div>
 
-          {/* Card 3 */}
+        
           <div className="bg-slate-50 border border-gray-100 rounded-xl p-6">
             <div className="flex items-center gap-3 mb-4">
               <Image

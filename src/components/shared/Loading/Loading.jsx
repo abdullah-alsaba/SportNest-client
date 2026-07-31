@@ -3,27 +3,21 @@
 export default function Loading() {
   return (
     <main className="relative min-h-screen bg-linear-to-br from-slate-50 via-white to-emerald-50 overflow-hidden flex items-center justify-center">
-      {/* Background dot grid */}
       <div className="absolute inset-0 bg-[radial-gradient(circle,#cbd5e1_1px,transparent_1px)] bg-size-[24px_24px] opacity-60" />
 
-      {/* Soft gradient blobs */}
       <div className="absolute -top-32 -left-32 w-125 h-125 bg-emerald-100 rounded-full blur-3xl opacity-40" />
       <div className="absolute -bottom-32 -right-32 w-125 h-125 bg-emerald-200 rounded-full blur-3xl opacity-40" />
 
-      {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-5">
         <h1 className="text-3xl font-bold text-green-700 mb-10">SportNest</h1>
 
-        {/* Spinner with orbiting dots */}
         <div className="relative w-40 h-40 flex items-center justify-center mb-10">
-          {/* Orbiting dots */}
           <div className="absolute inset-0 animate-spin-slow">
             <span className="absolute top-2 left-2 w-2.5 h-2.5 rounded-full bg-emerald-300" />
             <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-emerald-400" />
             <span className="absolute bottom-2 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-emerald-300" />
           </div>
 
-          {/* Football icon, spinning as the loader */}
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -45,13 +39,11 @@ export default function Loading() {
           Preparing premium courts and facilities for your next big win.
         </p>
 
-        {/* Progress bar */}
         <div className="w-72 h-1.5 bg-slate-200 rounded-full mt-8 overflow-hidden">
           <div className="h-full bg-green-700 rounded-full animate-loading-bar" />
         </div>
       </div>
 
-      {/* Footer */}
       <p className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-400 text-sm">
         © 2024 SportNest. Premium Sports Facility Management.
       </p>
