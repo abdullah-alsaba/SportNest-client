@@ -5,18 +5,22 @@ const sports = [
   "Tennis",
   "Football",
   "Basketball",
-  "Cricket",
+  "Padel",
   "Swimming",
   "Gym",
 ];
 
 const Filter = () => {
   return (
-    <div className="flex flex-wrap gap-3">
-      {sports.map((sport) => (
+    <div className="flex flex-wrap items-center gap-2">
+      {sports.map((sport, index) => (
         <button
           key={sport}
-          className="border border-gray-300 rounded-full px-4 py-2 hover:bg-green-600 hover:text-white transition"
+          className={`rounded-full border px-4 py-1.75 text-[12px] font-medium transition ${
+            index === 0
+              ? "border-[#006b3f] bg-[#006b3f] text-white"
+              : "border-gray-300 bg-white text-gray-600 hover:border-[#006b3f] hover:bg-[#006b3f] hover:text-white"
+          }`}
         >
           {sport}
         </button>
