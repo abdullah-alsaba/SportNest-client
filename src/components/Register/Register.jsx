@@ -24,8 +24,8 @@ const Register = () => {
         </div>
 
         <Button
-          variant="bordered"
-          className="mb-8 h-12 w-full border-gray-300 text-base font-medium"
+          variant="outline"
+          className="mb-8 h-12 w-full rounded-2xl border-gray-300 text-base font-medium"
         >
           <FaGoogle className="mr-2 text-lg text-green-500" />
           Continue with Google

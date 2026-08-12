@@ -20,24 +20,30 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/about"
+            href="/all-facilities"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            About
+            All Facilities
           </Link>
 
           <Link
-            href="/services"
+            href="/my-bookings"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            Services
+            My Bookings 
           </Link>
 
           <Link
-            href="/contact"
+            href="/add-facilities"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            Contact
+            Add Facilities
+          </Link>
+          <Link
+            href="/manage-facilities"
+            className="text-sm font-medium transition-colors hover:text-primary"
+          >
+            Manage Facilities
           </Link>
         </nav>
 
