@@ -1,10 +1,9 @@
 import Image from "next/image";
 import { Button } from "@heroui/react";
-import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="relative bg-gray-100 pb-20">
+    <section className="relative pb-20">
       <div className="relative h-175 overflow-hidden">
         <Image
           src="/heroimg.png"
@@ -30,18 +29,18 @@ const Hero = () => {
             </p>
 
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-                          <Link href="/all-facilities">
-                <Button
-                  size="lg"
-                  className="min-w-41.25 font-semibold bg-green-600 rounded-xl "
-                >
-                  Explore Facilities
-                </Button>
-              </Link>
+              <Button
+                color="primary"
+                size="lg"
+                className="min-w-41.25 font-semibold"
+              >
+                Explore Facilities
+              </Button>
 
               <Button
+                variant="bordered"
                 size="lg"
-                className="min-w-50 border-white/40 bg-white/10 font-semibold text-white rounded-xl"
+                className="min-w-50 border-white/40 bg-white/10 font-semibold text-white"
               >
                 Become a Facility Owner
               </Button>
