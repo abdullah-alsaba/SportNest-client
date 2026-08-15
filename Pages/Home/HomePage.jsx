@@ -1,3 +1,4 @@
+import Featured from '@/components/home/Featured';
 import Hero from '@/components/home/Hero';
 import ReadyToPlay from '@/components/home/ReadyToPlay';
 import SportsCard from '@/components/home/SportsCard';
@@ -10,7 +11,8 @@ const HomePage = () => {
     return (
         <div>
             <Hero />
-            <SportsCard/>
+            <SportsCard />
+            <Featured/>
            <StaticCard/>
         <Testimonials />
         <ReadyToPlay />
