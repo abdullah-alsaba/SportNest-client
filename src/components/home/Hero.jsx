@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@heroui/react";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -29,18 +30,18 @@ const Hero = () => {
             </p>
 
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-              <Button
-                color="primary"
-                size="lg"
-                className="min-w-41.25 font-semibold"
-              >
-                Explore Facilities
-              </Button>
+              <Link href="/all-facilities">
+                <Button
+                  size="lg"
+                  className="min-w-50 border-white/40 bg-green-600 font-semibold rounded-xl text-white"
+                >
+                  Explore Facilities
+                </Button>
+              </Link>
 
               <Button
-                variant="bordered"
                 size="lg"
-                className="min-w-50 border-white/40 bg-white/10 font-semibold text-white"
+                className="min-w-50 border-white/40 bg-white/10 font-semibold rounded-xl text-white"
               >
                 Become a Facility Owner
               </Button>
