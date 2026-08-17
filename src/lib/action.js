@@ -25,3 +25,16 @@ export const getCancelFacility = async (_id)=>{
 
     return data 
 }
+
+
+export const getAddNewFacility = async (facilityData) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/sports`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(facilityData)
+    })
+    const data = await res.json()
+    return data
+}
