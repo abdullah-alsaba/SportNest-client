@@ -44,6 +44,10 @@ const Register = () => {
   };
 
   const handelGoogleRegisterButton = async () => {
+
+    console.log(
+      "clicked"
+    )
     await signIn.social({
       provider: "google",
       callbackURL:"/"

@@ -14,28 +14,59 @@ import {
 
 import DurationSelector from "../Duration/Duration";
 import { FaArrowRight } from "react-icons/fa";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
+import { bookingFacility } from "@/lib/action";
 
 const BookingForm = ({ selectedFacilities }) => {
-  const [hours, setHours] = useState(1);
+  const { data: session } = authClient.useSession();
 
-  const { name, price_per_hour, available_slots } = selectedFacilities;
+  const [hours, setHours] = useState(1);
+  const [isBooking, setIsBooking] = useState(false);
+  const [isBooked, setIsBooked] = useState(false);
+
+  const {
+    name,
+    price_per_hour,
+    available_slots,
+    _id,
+    image,
+    facility_type,
+    location,
+  } = selectedFacilities;
 
   const totalPrice = price_per_hour * hours;
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
-    const data = {
+    const bookingData = {
       facility_name: name,
       booking_date: formData.get("date"),
       time_slot: formData.get("time"),
       hours,
       total_price: totalPrice,
+      facility_id: _id,
+      facility_image: image,
+      facility_location: location,
+      facility_type,
+      user_name: session?.user?.name,
+      user_email: session?.user?.email,
+      status: "pending",
     };
 
-    
+    setIsBooking(true);
+
+    const result = await bookingFacility(bookingData);
+
+    console.log(bookingData, result)
+
+    setIsBooking(false);
+    setIsBooked(true);
+
+    toast.success("Booking confirmed successfully!");
   };
 
   return (
@@ -103,14 +134,26 @@ const BookingForm = ({ selectedFacilities }) => {
 
             <Button
               type="submit"
-              className="flex items-center justify-center w-full h-12 gap-2 mt-1 text-sm font-semibold text-white transition bg-green-600 rounded-lg hover:bg-green-700"
+              isDisabled={isBooking || isBooked}
+              className={`flex items-center justify-center w-full h-12 gap-2 mt-1 text-sm font-semibold text-white rounded-lg transition ${
+                isBooked
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-green-600 hover:bg-green-700"
+              }`}
             >
-              Confirm Booking
-              <FaArrowRight />
+              {isBooked
+                ? "Already Booked"
+                : isBooking
+                  ? "Booking..."
+                  : "Confirm Booking"}
+
+              {!isBooked && !isBooking && <FaArrowRight />}
             </Button>
 
             <p className="text-xs text-center text-gray-500">
-              You won&apos;t be charged yet
+              {isBooked
+                ? "You have already booked this facility."
+                : "You won't be charged yet"}
             </p>
           </FieldGroup>
         </Fieldset>
