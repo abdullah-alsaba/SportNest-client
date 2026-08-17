@@ -13,7 +13,7 @@ import {
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { authClient } from "@/lib/auth-client";
+import { authClient, signIn } from "@/lib/auth-client";
 
 const LogIn = () => {
   const router = useRouter();
@@ -39,6 +39,13 @@ const LogIn = () => {
       router.push("/");
     }
   };
+
+   const handelGoogleLogInButton = async () => {
+      await signIn.social({
+        provider: "google",
+        callbackURL:"/"
+      })
+    }
 
   return (
     <div className="min-h-screen bg-[#f5f7ff] flex flex-col items-center justify-between py-10">
@@ -91,7 +98,11 @@ const LogIn = () => {
           <div className="flex-1 h-px bg-gray-200" />
         </div>
 
-        <Button variant="outline" className="w-full text-base font-medium h-14">
+        <Button
+          onClick={handelGoogleLogInButton}
+          variant="outline"
+          className="w-full text-base font-medium h-14"
+        >
           <FaGoogle className="mr-2 text-lg text-green-500 rounded-2xl" />
           Continue with Google
         </Button>

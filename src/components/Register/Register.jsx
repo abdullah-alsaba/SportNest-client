@@ -11,7 +11,7 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
-import { authClient } from "@/lib/auth-client";
+import { authClient, signIn } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
@@ -43,6 +43,13 @@ console.log(error)
     }
   };
 
+  const handelGoogleRegisterButton = async () => {
+    await signIn.social({
+      provider: "google",
+      callbackURL:"/"
+    })
+  }
+
   return (
     <div className="min-h-screen bg-[#f5f7ff] flex items-center justify-center px-4 py-10">
       <Card className="w-full max-w-lg p-8 bg-white border border-gray-200 shadow-xl rounded-3xl">
@@ -53,7 +60,10 @@ console.log(error)
           </p>
         </div>
 
-        <Button
+        <Button 
+          onClick={
+            handelGoogleRegisterButton
+          }
           variant="outline"
           className="w-full h-12 mb-8 text-base font-medium border-gray-300 rounded-2xl"
         >

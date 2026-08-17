@@ -54,7 +54,7 @@ const BookingForm = ({ selectedFacilities }) => {
                 Facility
               </Label>
 
-              <Input value={name} isReadOnly className="mt-2" />
+              <Input value={name} readOnly className="mt-2" />
 
               <FieldError />
             </TextField>
