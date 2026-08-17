@@ -11,11 +11,41 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
+import { redirect } from "next/navigation";
 
 const Register = () => {
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const newUser = Object.fromEntries(formData.entries());
+
+    const { name, image, email, password } = Object.fromEntries(
+      formData.entries(),
+    );
+
+    const { data, error } = await authClient.signUp.email({
+      name: name,
+      email: email,
+      password: password,
+      image: image,
+    });
+
+    if (data) {
+      toast.success("Account created successfully!");
+      redirect("/login")
+      
+    }
+    else {
+      toast.error("Registration failed. Please try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f5f7ff] flex items-center justify-center px-4 py-10">
-      <Card className="w-full max-w-lg rounded-3xl border border-gray-200 bg-white p-8 shadow-xl">
+      <Card className="w-full max-w-lg p-8 bg-white border border-gray-200 shadow-xl rounded-3xl">
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold text-gray-900">Join SportNest</h1>
           <p className="mt-3 text-gray-600">
@@ -25,21 +55,21 @@ const Register = () => {
 
         <Button
           variant="outline"
-          className="mb-8 h-12 w-full rounded-2xl border-gray-300 text-base font-medium"
+          className="w-full h-12 mb-8 text-base font-medium border-gray-300 rounded-2xl"
         >
           <FaGoogle className="mr-2 text-lg text-green-500" />
           Continue with Google
         </Button>
 
-        <div className="mb-8 flex items-center gap-4">
-          <div className="h-px flex-1 bg-gray-200" />
+        <div className="flex items-center gap-4 mb-8">
+          <div className="flex-1 h-px bg-gray-200" />
           <span className="text-xs font-medium tracking-wider text-gray-500">
             OR REGISTER WITH EMAIL
           </span>
-          <div className="h-px flex-1 bg-gray-200" />
+          <div className="flex-1 h-px bg-gray-200" />
         </div>
 
-        <Form className="flex w-full flex-col gap-6">
+        <Form onSubmit={handelSubmit} className="flex flex-col w-full gap-6">
           <TextField
             isRequired
             name="name"
@@ -72,21 +102,41 @@ const Register = () => {
             <FieldError />
           </TextField>
 
-          <TextField isRequired name="password" className="w-full">
+          <TextField
+            isRequired
+            name="password"
+            className="w-full"
+            validate={(value) => {
+              if (value.length < 6) {
+                return "Password must be at least 6 characters";
+              }
+
+              if (!/[A-Z]/.test(value)) {
+                return "Password must contain one uppercase letter";
+              }
+
+              if (!/[a-z]/.test(value)) {
+                return "Password must contain one lowercase letter";
+              }
+
+              return null;
+            }}
+          >
             <Label>Password</Label>
             <Input type="password" placeholder="••••••••" className="h-12" />
             <FieldError />
           </TextField>
 
           <Button
+            type="submit"
             color="success"
-            className=" bg-green-500  rounded-2xl h-14 w-full text-lg font-semibold"
+            className="w-full text-lg font-semibold bg-green-500 rounded-2xl h-14"
           >
             Create Account →
           </Button>
         </Form>
 
-        <p className="mt-8 text-center text-sm text-gray-600">
+        <p className="mt-8 text-sm text-center text-gray-600">
           Already have an account?{" "}
           <Link
             href="/login"
