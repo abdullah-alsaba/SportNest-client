@@ -54,6 +54,8 @@ const BookingForm = ({ selectedFacilities }) => {
       facility_type,
       user_name: session?.user?.name,
       user_email: session?.user?.email,
+      user_id: session?.user?.id,
+      user_image: session?.user?.image,
       status: "pending",
     };
 

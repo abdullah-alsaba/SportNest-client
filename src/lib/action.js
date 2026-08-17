@@ -9,3 +9,19 @@ export const bookingFacility = async (bookingData) => {
 
   return await res.json();
 };
+
+
+export const getCancelFacility = async (_id)=>{
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/bookings/${_id}`, {
+        method: "DELETE",
+        headers: {
+            "content-type" : "application/json"
+        }
+
+        
+    })
+    const data = await res.json();
+
+    return data 
+}
