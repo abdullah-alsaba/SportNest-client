@@ -1,40 +1,55 @@
+"use server";
+
+import { getJwtToken } from "./token";
+
 export const bookingFacility = async (bookingData) => {
+  const token = await getJwtToken();
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/bookings`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(bookingData),
   });
 
-  return await res.json();
+  const data = await res.json();
+
+  return data;
 };
 
+export const getCancelFacility = async (_id) => {
+  const token = await getJwtToken();
 
-export const getCancelFacility = async (_id)=>{
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URI}/bookings/${_id}`,
+    {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
+  );
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/bookings/${_id}`, {
-        method: "DELETE",
-        headers: {
-            "content-type" : "application/json"
-        }
+  const data = await res.json();
 
-        
-    })
-    const data = await res.json();
-
-    return data 
-}
-
+  return data;
+};
 
 export const getAddNewFacility = async (facilityData) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/sports`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(facilityData)
-    })
-    const data = await res.json()
-    return data
-}
+  const token = await getJwtToken();
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/sports`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(facilityData),
+  });
+
+  const data = await res.json();
+
+  return data;
+};
