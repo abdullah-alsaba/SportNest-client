@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import { Button } from "@heroui/react";
 import Link from "next/link";
@@ -5,14 +6,14 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <section className="relative pb-20">
-      <div className="relative h-175 overflow-hidden">
+      <div className="relative overflow-hidden h-175">
         <Image
           src="/heroimg.png"
           alt="Sports facility"
           width={1920}
           height={1080}
           priority
-          className="h-full w-full object-cover"
+          className="object-cover w-full h-full"
         />
 
         <div className="absolute inset-0 bg-slate-950/65" />
@@ -23,17 +24,17 @@ const Hero = () => {
               Book Your Perfect Sports Facility
             </h1>
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-gray-200 md:text-lg">
+            <p className="max-w-2xl mx-auto mt-5 text-base leading-7 text-gray-200 md:text-lg">
               Access premium courts, fields, and pools instantly. Join thousands
               of athletes and facility owners in the most advanced sports
               ecosystem.
             </p>
 
-            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <div className="flex flex-col justify-center gap-4 mt-8 sm:flex-row">
               <Link href="/all-facilities">
                 <Button
                   size="lg"
-                  className="min-w-50 border-white/40 bg-green-600 font-semibold rounded-xl text-white"
+                  className="font-semibold text-white bg-green-600 min-w-50 border-white/40 rounded-xl"
                 >
                   Explore Facilities
                 </Button>
@@ -41,7 +42,7 @@ const Hero = () => {
 
               <Button
                 size="lg"
-                className="min-w-50 border-white/40 bg-white/10 font-semibold rounded-xl text-white"
+                className="font-semibold text-white min-w-50 border-white/40 bg-white/10 rounded-xl"
               >
                 Become a Facility Owner
               </Button>
@@ -51,7 +52,7 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 mx-auto -mt-16 w-[95%] max-w-6xl rounded-xl bg-white px-6 py-7 shadow-xl md:px-10 md:py-8">
-        <div className="grid grid-cols-1 divide-y divide-gray-200 text-center md:grid-cols-3 md:divide-x md:divide-y-0">
+        <div className="grid grid-cols-1 text-center divide-y divide-gray-200 md:grid-cols-3 md:divide-x md:divide-y-0">
           <div className="py-4 md:py-0">
             <h2 className="text-3xl font-bold text-green-700">500+</h2>
             <p className="mt-1 text-sm text-gray-500">Global Facilities</p>
