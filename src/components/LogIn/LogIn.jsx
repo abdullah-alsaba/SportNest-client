@@ -2,14 +2,47 @@
 
 import Link from "next/link";
 import { FaGoogle } from "react-icons/fa";
-import { Button, Card, Form, Input, Label, TextField } from "@heroui/react";
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  Label,
+  TextField,
+  toastQueue,
+} from "@heroui/react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 const LogIn = () => {
+  const router = useRouter();
+
+  const handelLogin = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const newUser = Object.fromEntries(formData.entries());
+
+    const { email, password } = newUser;
+
+    const { data, error } = await authClient.signIn.email({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      toast.error("Login failed. Please check your credentials.");
+    } else {
+      toast.success("Logged in successfully!");
+      router.push("/");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f5f7ff] flex flex-col items-center justify-between py-10">
-    
-
-      <Card className="w-full max-w-130 rounded-2xl border border-gray-200 bg-white p-10 shadow-xl">
+      <Card className="w-full p-10 bg-white border border-gray-200 shadow-xl max-w-130 rounded-2xl">
         <div className="mb-8 text-center">
           <h1 className="text-5xl font-bold text-gray-900">Welcome Back</h1>
           <p className="mt-3 text-xl text-gray-600">
@@ -17,7 +50,7 @@ const LogIn = () => {
           </p>
         </div>
 
-        <Form className="space-y-6">
+        <Form onSubmit={handelLogin} className="space-y-6">
           <TextField name="email" className="w-full">
             <Label className="mb-2 text-base font-medium">Email Address</Label>
             <Input
@@ -28,7 +61,7 @@ const LogIn = () => {
           </TextField>
 
           <TextField name="password" className="w-full">
-            <div className="mb-2 flex items-center justify-between">
+            <div className="flex items-center justify-between mb-2">
               <Label className="text-base font-medium">Password</Label>
 
               <Link
@@ -42,36 +75,28 @@ const LogIn = () => {
             <Input type="password" placeholder="••••••••" className="h-14" />
           </TextField>
 
-          <label className="flex items-center gap-2 text-base text-gray-700">
-            <input
-              type="checkbox"
-              className="h-5 w-5 rounded border-gray-300"
-            />
-            Remember me for 30 days
-          </label>
-
-          <Button  className=" bg-green-500  rounded-2xl h-14 w-full text-lg font-semibold">
+          <Button
+            type="submit"
+            className="w-full text-lg font-semibold bg-green-500 rounded-2xl h-14"
+          >
             Login →
           </Button>
         </Form>
 
-        <div className="my-8 flex items-center gap-4">
-          <div className="h-px flex-1 bg-gray-200" />
-          <span className="text-sm uppercase text-gray-500">
+        <div className="flex items-center gap-4 my-8">
+          <div className="flex-1 h-px bg-gray-200" />
+          <span className="text-sm text-gray-500 uppercase">
             OR CONTINUE WITH
           </span>
-          <div className="h-px flex-1 bg-gray-200" />
+          <div className="flex-1 h-px bg-gray-200" />
         </div>
 
-        <Button
-          variant="outline"
-          className="h-14 w-full text-base font-medium"
-        >
-          <FaGoogle className=" rounded-2xl mr-2 text-lg text-green-500" />
+        <Button variant="outline" className="w-full text-base font-medium h-14">
+          <FaGoogle className="mr-2 text-lg text-green-500 rounded-2xl" />
           Continue with Google
         </Button>
 
-        <p className="mt-8 text-center text-lg text-gray-700">
+        <p className="mt-8 text-lg text-center text-gray-700">
           Don&apos;t have an account?{" "}
           <Link
             href="/register"
@@ -81,8 +106,6 @@ const LogIn = () => {
           </Link>
         </p>
       </Card>
-
-    
     </div>
   );
 };

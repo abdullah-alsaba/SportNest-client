@@ -13,18 +13,18 @@ import {
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+
 
 const Register = () => {
+  const router =useRouter()
   const handelSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const newUser = Object.fromEntries(formData.entries());
 
-    const { name, image, email, password } = Object.fromEntries(
-      formData.entries(),
-    );
+    const { name, image, email, password } = newUser
 
     const { data, error } = await authClient.signUp.email({
       name: name,
@@ -32,10 +32,10 @@ const Register = () => {
       password: password,
       image: image,
     });
-
+console.log(error)
     if (data) {
       toast.success("Account created successfully!");
-      redirect("/login")
+      router.push("/login")
       
     }
     else {
@@ -107,8 +107,8 @@ const Register = () => {
             name="password"
             className="w-full"
             validate={(value) => {
-              if (value.length < 6) {
-                return "Password must be at least 6 characters";
+              if (value.length < 8) {
+                return "Password must be at least 8 characters";
               }
 
               if (!/[A-Z]/.test(value)) {
