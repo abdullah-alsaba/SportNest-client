@@ -32,7 +32,7 @@ const Register = () => {
       password: password,
       image: image,
     });
-console.log(error)
+
     if (data) {
       toast.success("Account created successfully!");
       router.push("/login")
