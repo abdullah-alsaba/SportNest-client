@@ -29,30 +29,31 @@ const AddFacilityForm = () => {
     };
 
     const handleSubmit = async (e) => {
+      e.preventDefault();
 
+      const form = e.currentTarget;
+      const formData = new FormData(form);
 
-  const formData = new FormData(e.currentTarget);
+      const facilityData = {
+        name: formData.get("name"),
+        facility_type: formData.get("facility_type"),
+        image: formData.get("image"),
+        location: formData.get("location"),
+        price_per_hour: Number(formData.get("price_per_hour")),
+        capacity: Number(formData.get("capacity")),
+        available_slots: selectedSlots,
+        description: formData.get("description"),
+        owner_email: formData.get("owner_email"),
+      };
 
-  const facilityData = {
-    name: formData.get("name"),
-    facility_type: formData.get("facility_type"),
-    image: formData.get("image"),
-    location: formData.get("location"),
-    price_per_hour: Number(formData.get("price_per_hour")),
-    capacity: Number(formData.get("capacity")),
-    available_slots: selectedSlots,
-    description: formData.get("description"),
-    owner_email: formData.get("owner_email"),
-  };
+      const addNewFacility = await getAddNewFacility(facilityData);
 
-  
-  const addNewFacility = await getAddNewFacility(facilityData);
-
-  
-  if (addNewFacility.insertedId>0) {
-    toast.success("Facility added successfully!");
-  }
-};
+      if (addNewFacility?.insertedId || addNewFacility?.acknowledged) {
+        toast.success("Facility added successfully!");
+        form.reset();
+        setSelectedSlots([]);
+      }
+    };
 
         return (
             <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-2xl sm:p-8">
