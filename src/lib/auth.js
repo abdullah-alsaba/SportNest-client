@@ -4,11 +4,12 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { jwt } from "better-auth/plugins";
 
 const client = new MongoClient(process.env.MONGODB_URI);
-const db = client.db();
+const db = client.db("sportnestDB");
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL || "https://sportnest-teal.vercel.app",
+  secret: process.env.BETTER_AUTH_SECRET,
   database: mongodbAdapter(db, {
-    // Optional: if you don't provide a client, database transactions won't be enabled.
     client,
   }),
   emailAndPassword: {
@@ -24,8 +25,12 @@ export const auth = betterAuth({
   session: {
     cookieCache: {
       enabled: true,
-      strategy: "jwt",
+      maxAge: 5 * 60,
     },
   },
   plugins: [jwt()],
+  trustedOrigins: [
+    "https://sportnest-teal.vercel.app",
+    "http://localhost:3000",
+  ],
 });
