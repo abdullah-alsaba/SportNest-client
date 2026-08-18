@@ -18,9 +18,10 @@ export const getAllSports = async (search = "", type = "") => {
 export const getSelectedFacility = async (id) => {
   const token = await getJwtToken();
 
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/sports/${id}`, {
     headers: {
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 

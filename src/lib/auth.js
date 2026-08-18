@@ -4,7 +4,6 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { jwt } from "better-auth/plugins";
 
 const client = new MongoClient(process.env.MONGODB_URI);
-
 const db = client.db("sportnestDB");
 
 export const auth = betterAuth({
@@ -36,5 +35,5 @@ export const auth = betterAuth({
 
   plugins: [jwt()],
 
-  trustedOrigins: [process.env.BETTER_AUTH_URL],
+  trustedOrigins: ["https://sportnest-teal.vercel.app"],
 });
