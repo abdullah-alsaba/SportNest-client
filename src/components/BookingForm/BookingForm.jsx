@@ -63,7 +63,7 @@ const BookingForm = ({ selectedFacilities }) => {
 
     const result = await bookingFacility(bookingData);
 
-    console.log(bookingData, result)
+  
 
     setIsBooking(false);
     setIsBooked(true);

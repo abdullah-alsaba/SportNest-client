@@ -18,7 +18,7 @@ export const getAllSports = async (search = "", type = "") => {
 export const getSelectedFacility = async (id) => {
   const token = await getJwtToken();
 
-  console.log("JWT TOKEN:", token);
+
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/sports/${id}`, {
     headers: {
@@ -52,8 +52,7 @@ export const getBookingsData = async () => {
   );
 
   if (!res.ok) {
-    console.log("Booking API Error:", res.status);
-    console.log("Booking API Response:", await res.text());
+   
 
     return [];
   }
