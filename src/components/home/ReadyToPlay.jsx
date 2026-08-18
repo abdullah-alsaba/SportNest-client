@@ -1,25 +1,42 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+
 export default function ReadyToPlay() {
   return (
     <section className="py-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-green-500 rounded-2xl py-16 px-8 text-center">
+      <div className="mx-auto max-w-7xl px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="rounded-2xl bg-green-600 px-8 py-16 text-center"
+        >
           <h2 className="text-4xl font-bold text-white">Ready to Play?</h2>
 
-          <p className="text-green-100 mt-4 max-w-2xl mx-auto">
+          <p className="mx-auto mt-4 max-w-2xl text-green-100">
             Join the SportNest community today and unlock exclusive rates at
             top-tier sports facilities near you.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <button className="bg-white text-green-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link
+              href="/all-facilities"
+              className="rounded-lg bg-white px-6 py-3 font-semibold text-green-600 transition hover:bg-gray-100"
+            >
               Get Started Now
-            </button>
+            </Link>
 
-            <button className="border border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-green-600 transition">
+            <Link
+              href="/register"
+              className="rounded-lg border border-white px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-green-600"
+            >
               Learn More
-            </button>
+            </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
