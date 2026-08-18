@@ -6,6 +6,8 @@ import { jwt } from "better-auth/plugins";
 const client = new MongoClient(process.env.MONGODB_URI);
 const db = client.db("sportnestDB");
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL || "https://sportnest-teal.vercel.app",
   secret: process.env.BETTER_AUTH_SECRET,
@@ -26,6 +28,26 @@ export const auth = betterAuth({
     cookieCache: {
       enabled: true,
       maxAge: 5 * 60,
+    },
+    cookie: {
+      secure: isProduction,
+      sameSite: "lax",
+      httpOnly: true,
+    },
+    expiresIn: 60 * 60 * 24 * 7,
+  },
+  cookies: {
+    session_token: {
+      name: "better-auth.session_token",
+      secure: isProduction,
+      sameSite: "lax",
+      httpOnly: true,
+    },
+    callback: {
+      name: "better-auth.callback",
+      secure: isProduction,
+      sameSite: "lax",
+      httpOnly: true,
     },
   },
   plugins: [jwt()],

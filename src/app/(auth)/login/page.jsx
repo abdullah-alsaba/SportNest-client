@@ -1,5 +1,5 @@
 import LogIn from '@/components/LogIn/LogIn';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 export const metadata = {
   title: "SportNest - Login",
@@ -9,7 +9,13 @@ export const metadata = {
 const LogInPage = () => {
     return (
         <div>
-            <LogIn/>
+            <Suspense fallback={
+                <div className="min-h-screen bg-[#f5f7ff] flex items-center justify-center">
+                    <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin" />
+                </div>
+            }>
+                <LogIn/>
+            </Suspense>
         </div>
     );
 };

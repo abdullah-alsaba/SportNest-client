@@ -9,43 +9,70 @@ import {
   Input,
   Label,
   TextField,
-  toastQueue,
 } from "@heroui/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { authClient, signIn } from "@/lib/auth-client";
+import { authClient, signIn, useSession } from "@/lib/auth-client";
 
 const LogIn = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const { data: session, isPending, refetch } = useSession();
+
+  useEffect(() => {
+    if (!isPending && session) {
+      router.replace(callbackUrl);
+    }
+  }, [session, isPending, router, callbackUrl]);
 
   const handelLogin = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-
     const newUser = Object.fromEntries(formData.entries());
-
     const { email, password } = newUser;
 
     const { data, error } = await authClient.signIn.email({
       email: email,
       password: password,
+      callbackURL: callbackUrl,
     });
 
     if (error) {
       toast.error("Login failed. Please check your credentials.");
     } else {
       toast.success("Logged in successfully!");
-      router.push("/");
+      await refetch();
+      router.push(callbackUrl);
+      router.refresh();
     }
   };
 
-   const handelGoogleLogInButton = async () => {
+  const handelGoogleLogInButton = async () => {
+    try {
       await signIn.social({
         provider: "google",
-        callbackURL:"/"
-      })
+        callbackURL: callbackUrl,
+      });
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+      toast.error("Google login failed. Please try again.");
     }
+  };
+
+  if (isPending) {
+    return (
+      <div className="min-h-screen bg-[#f5f7ff] flex items-center justify-center">
+        <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (session) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-[#f5f7ff] flex flex-col items-center justify-between py-10">
