@@ -1,10 +1,12 @@
+import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
-export async function middleware(request) {
-  // Better-Auth sets 'better-auth.session_token' cookie on successful login
-  const sessionToken = request.cookies.get("better-auth.session_token");
+export async function proxy(request) {
+  const session = await auth.api.getSession({
+    headers: request.headers,
+  });
 
-  if (!sessionToken?.value) {
+  if (!session) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

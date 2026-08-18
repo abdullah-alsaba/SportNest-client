@@ -89,17 +89,17 @@ export default function Footer() {
           </h3>
           <ul className="space-y-2.5 text-sm text-gray-600 dark:text-gray-400">
             <li>
-              <Link href="/faq" className="transition hover:text-green-600 dark:hover:text-green-400">
+              <Link href="/" className="transition hover:text-green-600 dark:hover:text-green-400">
                 Help & FAQ
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="transition hover:text-green-600 dark:hover:text-green-400">
+              <Link href="/" className="transition hover:text-green-600 dark:hover:text-green-400">
                 Terms of Service
               </Link>
             </li>
             <li>
-              <Link href="/privacy" className="transition hover:text-green-600 dark:hover:text-green-400">
+              <Link href="/" className="transition hover:text-green-600 dark:hover:text-green-400">
                 Privacy Policy
               </Link>
             </li>
