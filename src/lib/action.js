@@ -53,3 +53,35 @@ export const getAddNewFacility = async (facilityData) => {
 
   return data;
 };
+
+export const updateFacility = async (id, facilityData) => {
+  const token = await getJwtToken();
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/sports/${id}`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(facilityData),
+  });
+
+  const data = await res.json();
+
+  return data;
+};
+
+export const deleteFacility = async (id) => {
+  const token = await getJwtToken();
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/sports/${id}`, {
+    method: "DELETE",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await res.json();
+
+  return data;
+};

@@ -49,7 +49,7 @@ const AddFacilityForm = () => {
   const addNewFacility = await getAddNewFacility(facilityData);
 
   
-  if (addNewFacility.insertedId) {
+  if (addNewFacility.insertedId>0) {
     toast.success("Facility added successfully!");
   }
 };
