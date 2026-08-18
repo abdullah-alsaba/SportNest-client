@@ -3,35 +3,21 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "@/lib/auth-client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import Profile from "../Profile/Profile";
 
 export default function Navbar() {
-  const { data: session, isPending, refetch } = useSession();
-  const pathname = usePathname();
+  const { data: session, isPending } = useSession();
   const [isDark, setIsDark] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
-      document.documentElement.classList.add("dark");
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDark(true);
+      document.documentElement.classList.add("dark");
     }
   }, []);
-
-  useEffect(() => {
-    refetch();
-  }, [pathname, refetch]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      refetch();
-    }, 100);
-    return () => clearTimeout(timeout);
-  }, [refetch]);
 
   const toggleTheme = () => {
     if (isDark) {

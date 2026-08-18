@@ -1,29 +1,22 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { ArrowRightFromSquare, Gear } from "@gravity-ui/icons";
 import { Avatar, Dropdown, Label } from "@heroui/react";
 import { signOut, useSession } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const Profile = () => {
   const router = useRouter();
-  const pathname = usePathname();
-  const { data: session, isPending, refetch } = useSession();
-
-  useEffect(() => {
-    refetch();
-  }, [pathname, refetch]);
+  const { data: session, isPending } = useSession();
 
   const handleSignOut = async () => {
     try {
       await signOut();
-      toast.success("Logged out successfully!");
       router.replace("/login");
-      router.refresh();
     } catch (error) {
       console.error(error);
       toast.error("Logout failed. Please try again.");

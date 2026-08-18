@@ -11,24 +11,13 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
-import { authClient, signIn, useSession } from "@/lib/auth-client";
+import { authClient, signIn } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 
 const Register = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
-  const { data: session, isPending, refetch } = useSession();
-
-  useEffect(() => {
-    if (!isPending && session) {
-      router.replace(callbackUrl);
-    }
-  }, [session, isPending, router, callbackUrl]);
-
+  const router =useRouter()
   const handelSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,41 +31,27 @@ const Register = () => {
       email: email,
       password: password,
       image: image,
-      callbackURL: callbackUrl,
     });
 
     if (data) {
       toast.success("Account created successfully!");
-      await refetch();
-      router.push("/login");
+      router.push("/login")
+      
     }
     else {
-      toast.error(error?.message || "Registration failed. Please try again.");
+      toast.error("Registration failed. Please try again.");
     }
   };
 
   const handelGoogleRegisterButton = async () => {
-    try {
-      await signIn.social({
-        provider: "google",
-        callbackURL: callbackUrl,
-      });
-    } catch (error) {
-      console.error("Google sign-up error:", error);
-      toast.error("Google registration failed. Please try again.");
-    }
-  };
 
-  if (isPending) {
-    return (
-      <div className="min-h-screen bg-[#f5f7ff] flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
-
-  if (session) {
-    return null;
+    console.log(
+      "clicked"
+    )
+    await signIn.social({
+      provider: "google",
+      callbackURL:"/"
+    })
   }
 
   return (
