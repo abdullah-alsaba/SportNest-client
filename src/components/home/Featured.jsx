@@ -7,16 +7,16 @@ const Featured = async () => {
   const features = await getAllSports();
 
   return (
-    <section className="bg-[#e8ecff] px-4 py-14 md:px-8 lg:px-12">
+    <section className="bg-slate-50 dark:bg-slate-900/60 px-4 py-14 md:px-8 lg:px-12 transition-colors">
       <div className="mx-auto max-w-300">
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-gray-800">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
             Featured Facilities
-          </h1>
+          </h2>
 
           <Link
             href="/all-facilities"
-            className="flex items-center gap-2 font-medium text-green-700 transition hover:text-green-800"
+            className="flex items-center gap-2 font-medium text-green-700 dark:text-green-400 transition hover:text-green-800"
           >
             See All
             <ArrowRight size={18} />

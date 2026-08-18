@@ -58,11 +58,11 @@ export default function NotFound() {
             </Link>
 
             <Link
-              href="/contact"
-              className="bg-indigo-100 hover:bg-indigo-200 duration-300 text-slate-800 px-8 py-4 rounded-xl flex items-center justify-center gap-2 font-medium"
+              href="/all-facilities"
+              className="bg-green-700 hover:bg-green-800 duration-300 text-white px-8 py-4 rounded-xl flex items-center justify-center gap-2 font-medium"
             >
-              <CircleHelp size={20} />
-              Contact Support
+              <Search size={20} />
+              Explore Facilities
             </Link>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function NotFound() {
             </p>
 
             <Link
-              href="/facilities"
+              href="/all-facilities"
               className="inline-block mt-6 text-green-700 font-semibold hover:underline"
             >
               Explore venues →
@@ -95,7 +95,7 @@ export default function NotFound() {
             </p>
 
             <Link
-              href="/facilities"
+              href="/all-facilities"
               className="inline-block mt-6 text-green-700 font-semibold hover:underline"
             >
               Book now →
@@ -112,7 +112,7 @@ export default function NotFound() {
             </p>
 
             <Link
-              href="/contact"
+              href="/"
               className="inline-block mt-6 text-green-700 font-semibold hover:underline"
             >
               Support Centre →

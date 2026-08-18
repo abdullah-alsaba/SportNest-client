@@ -23,8 +23,8 @@ const ManageFacilitiesPage = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold">Manage Facilities</h1>
-          <p className="text-gray-500 mt-1">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Manage Facilities</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">
             Review, update, or remove your listed sports facilities and venues.
           </p>
         </div>

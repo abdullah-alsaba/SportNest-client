@@ -66,8 +66,8 @@ const ManageFacilityCard = ({ facility }) => {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
-      <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+    <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition hover:shadow-md">
+      <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-slate-800">
         <Image
           src={image || "/heroimg.png"}
           alt={name}
@@ -81,19 +81,19 @@ const ManageFacilityCard = ({ facility }) => {
       </div>
 
       <div className="p-5">
-        <h2 className="text-lg font-bold text-gray-900">{name}</h2>
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white truncate">{name}</h3>
 
-        <div className="mt-2 flex items-center gap-1.5 text-xs text-gray-500">
+        <div className="mt-2 flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
           <MapPin size={14} className="shrink-0 text-gray-400" />
           <span className="truncate">{location}</span>
         </div>
 
-        <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
+        <div className="mt-5 flex items-center justify-between border-t border-gray-100 dark:border-slate-800 pt-4">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
               PRICE PER HOUR
             </p>
-            <p className="text-base font-bold text-green-700">
+            <p className="text-base font-bold text-green-700 dark:text-green-400">
               ${Number(price_per_hour).toFixed(2)}
             </p>
           </div>
