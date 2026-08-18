@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "SportNest",
+  title: "SportNest - Sports Facility Booking Platform",
   description: "Sports Facility Booking Management System",
   icons: {
     icon: "/icon.png",

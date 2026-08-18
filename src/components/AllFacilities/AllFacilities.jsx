@@ -1,11 +1,46 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { Search } from "lucide-react";
-import React from "react";
 import Filter from "../Filter/Filter";
-import { getAllSports } from "@/lib/data";
 import FacilitiesCard from "../FacilitiesCard/FacilitiesCard";
 
-const AllFacilities = async () => {
-  const allFacilities = await getAllSports();
+const AllFacilities = () => {
+  const [facilities, setFacilities] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedSport, setSelectedSport] = useState("All Sports");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFacilities = async () => {
+      setLoading(true);
+      try {
+        const params = new URLSearchParams();
+        if (searchTerm.trim()) {
+          params.append("search", searchTerm.trim());
+        }
+        if (selectedSport && selectedSport !== "All Sports") {
+          params.append("type", selectedSport);
+        }
+
+        const query = params.toString() ? `?${params.toString()}` : "";
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/sports${query}`);
+        const data = await res.json();
+        setFacilities(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error(error);
+        setFacilities([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const debounceTimer = setTimeout(() => {
+      fetchFacilities();
+    }, 300);
+
+    return () => clearTimeout(debounceTimer);
+  }, [searchTerm, selectedSport]);
 
   return (
     <section className="min-h-screen bg-[#f8f9fb] px-6 py-6">
@@ -26,6 +61,8 @@ const AllFacilities = async () => {
 
             <input
               type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by Facility Name..."
               className="w-full bg-transparent text-[12px] outline-none placeholder:text-gray-400"
             />
@@ -33,14 +70,30 @@ const AllFacilities = async () => {
         </div>
 
         <div className="mt-5">
-          <Filter />
+          <Filter
+            selectedSport={selectedSport}
+            onSelectSport={setSelectedSport}
+          />
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {allFacilities.map((facilities) => (
-            <FacilitiesCard key={facilities._id} facilities={facilities} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="mt-16 flex justify-center">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-green-600 border-t-transparent" />
+          </div>
+        ) : facilities.length === 0 ? (
+          <div className="mt-16 text-center text-gray-500">
+            <p className="text-base font-medium">No facilities found.</p>
+            <p className="mt-1 text-xs text-gray-400">
+              Try searching with another facility name or category.
+            </p>
+          </div>
+        ) : (
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {facilities.map((facility) => (
+              <FacilitiesCard key={facility._id} facilities={facility} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

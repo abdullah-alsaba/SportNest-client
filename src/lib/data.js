@@ -2,8 +2,15 @@ import { auth } from "./auth";
 import { headers } from "next/headers";
 import { getJwtToken } from "./token";
 
-export const getAllSports = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/sports`);
+export const getAllSports = async (search = "", type = "") => {
+  const params = new URLSearchParams();
+  if (search) params.append("search", search);
+  if (type && type !== "All Sports") params.append("type", type);
+
+  const query = params.toString() ? `?${params.toString()}` : "";
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/sports${query}`, {
+    cache: "no-store",
+  });
   const data = await res.json();
   return data;
 };
@@ -21,28 +28,6 @@ export const getSelectedFacility = async (id) => {
 
   return data;
 };
-
-// export const getBookingsData = async () => {
-//   const token = await getJwtToken();
-
-//   const session = await auth.api.getSession({
-//     headers: await headers(),
-//   });
-//   const user = session?.user;
-
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_API_URI}/bookings/${user?.id}`,
-//     {
-//       headers: {
-//         authorization: `Bearer ${token}`,
-//       },
-//     },
-//   );
-
-//   const data = await res.json();
-
-//   return data;
-// };
 
 export const getBookingsData = async () => {
   const session = await auth.api.getSession({

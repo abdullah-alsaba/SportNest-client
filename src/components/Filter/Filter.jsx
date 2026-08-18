@@ -2,29 +2,35 @@ import React from "react";
 
 const sports = [
   "All Sports",
-  "Tennis",
   "Football",
+  "Badminton",
+  "Cricket",
   "Basketball",
-  "Padel",
+  "Tennis",
   "Swimming",
-  "Gym",
 ];
 
-const Filter = () => {
+const Filter = ({ selectedSport = "All Sports", onSelectSport }) => {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      {sports.map((sport, index) => (
-        <button
-          key={sport}
-          className={`rounded-full border px-4 py-1.75 text-[12px] font-medium transition ${
-            index === 0
-              ? "border-[#006b3f] bg-[#006b3f] text-white"
-              : "border-gray-300 bg-white text-gray-600 hover:border-[#006b3f] hover:bg-[#006b3f] hover:text-white"
-          }`}
-        >
-          {sport}
-        </button>
-      ))}
+      {sports.map((sport) => {
+        const isSelected = selectedSport === sport;
+
+        return (
+          <button
+            key={sport}
+            type="button"
+            onClick={() => onSelectSport && onSelectSport(sport)}
+            className={`rounded-full border px-4 py-1.5 text-xs font-medium transition cursor-pointer ${
+              isSelected
+                ? "border-green-700 bg-green-700 text-white"
+                : "border-gray-300 bg-white text-gray-700 hover:border-green-700 hover:text-green-700"
+            }`}
+          >
+            {sport}
+          </button>
+        );
+      })}
     </div>
   );
 };
